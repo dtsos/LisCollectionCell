@@ -21,7 +21,7 @@ class ArticleCollectionCell : UICollectionViewCell {
         actionSaveGalleryTap!(self)
     }
     
-     var actionSaveGalleryTap: ((UICollectionViewCell) -> Void)?
+    var actionSaveGalleryTap: ((UICollectionViewCell) -> Void)?
     @IBOutlet weak var labelTime: UILabel!
     @IBOutlet weak var labelTitle: UILabel!
     @IBOutlet weak var labelAuthor: UILabel!
@@ -34,21 +34,7 @@ class ArticleCollectionCell : UICollectionViewCell {
     
     
     fileprivate var currentArticleId = ""
-    var isHeightCalculated: Bool = false
     
-    override func preferredLayoutAttributesFitting(_ layoutAttributes: UICollectionViewLayoutAttributes) -> UICollectionViewLayoutAttributes {
-        //Exhibit A - We need to cache our calculation to prevent a crash.
-        if !isHeightCalculated {
-            setNeedsLayout()
-            layoutIfNeeded()
-            let size = contentView.systemLayoutSizeFitting(layoutAttributes.size)
-            var newFrame = layoutAttributes.frame
-            newFrame.size.width = CGFloat(ceilf(Float(size.width)))
-            layoutAttributes.frame = newFrame
-            isHeightCalculated = true
-        }
-        return layoutAttributes
-    }
     var articleId: String {
         get {
             return currentArticleId
@@ -85,18 +71,13 @@ class ArticleCollectionCell : UICollectionViewCell {
         
     }
     override func prepareForReuse() {
-       config()
+        config()
     }
     
     override func layoutSubviews() {
-       config()
+        config()
         
-//        layer.borderColor = UIColor.black.cgColor
-//        layer.borderWidth = 2.0
-//        layer.cornerRadius = 4.0
     }
-    func loadImageUrl(url:String) {
-       
-    }
+    
     
 }

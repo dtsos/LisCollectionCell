@@ -66,7 +66,7 @@ class ReditUrlSessionClient {
                                         
                                     }
                                     if let after =  jsonKeyData["after"]{
-                                        UserDefaults.standard.set(after, forKey: "ListRedit_Paging_After")
+                                        UserDefaults.standard.set(after, forKey: UserDefaultKey_ListReditPagingAfter)
                                         UserDefaults.standard.synchronize()
                                     }
                                     completionHandler(ManagerShared.sharedInstance.listArticle)

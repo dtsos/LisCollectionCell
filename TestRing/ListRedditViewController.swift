@@ -18,27 +18,14 @@ class ListRedditViewController: UIViewController, UICollectionViewDelegate,UICol
     var startIndex = 0
     var scale:CGFloat = 1
     var padding:CGFloat = 24
-    var floatWidth:CGFloat = 0.0
-    var floatHeight:CGFloat = 0.0
+    
     let columnNum: CGFloat = 2 //use number of columns instead of a static maximum cell width
     var cellWidth: CGFloat = 0
     let  refreshControl = UIRefreshControl()
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        // Do any additional setup after loading the view.
         
-        
-        //        self.floatWidth = (Double(320 - (self.padding * 3) / 2))
-        //        self.floatHeight =  self.floatWidth * 9 / 16
-        //        self.collectionView.register(ArticleCollectionCell.self, forCellWithReuseIdentifier: reuseIdentifier)
-        
-        //        if let flowLayout = collectionView.collectionViewLayout as? UICollectionViewFlowLayout {
-        //            flowLayout.estimatedItemSize = CGSize(width:1, height:1)
-        //            flowLayout.sectionInset = UIEdgeInsetsMake(10, 10, 10, 10)
-        //        }
-        self.floatWidth = UIScreen.main.bounds.size.width
-        self.floatHeight = UIScreen.main.bounds.size.height
         self.collectionView.delegate = self
         self.collectionView.dataSource = self
         let flow:UICollectionViewFlowLayout =  self.collectionView.collectionViewLayout as! UICollectionViewFlowLayout
@@ -60,16 +47,7 @@ class ListRedditViewController: UIViewController, UICollectionViewDelegate,UICol
         
     }
     
-    //    override func viewDidLayoutSubviews() {
-    //        super.viewDidLayoutSubviews()
-    //
-    //        if let layout = collectionView.collectionViewLayout as? UICollectionViewFlowLayout {
-    //            let itemWidth = view.bounds.width / 1.0
-    //            let itemHeight = layout.itemSize.height
-    //            layout.itemSize = CGSize(width: itemWidth, height: itemHeight)
-    //            layout.invalidateLayout()
-    //        }
-    //    }
+   
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
@@ -108,7 +86,7 @@ class ListRedditViewController: UIViewController, UICollectionViewDelegate,UICol
         cell?.labelAuthor.text =  article.author
         cell?.labelTotalComment.text = String(article.totalComment) + " Comments"
         cell?.article = article
-        cell?.loadImageUrl(url: article.thumbNail)
+        
         if article.entryDate != nil {
             
             
@@ -178,9 +156,8 @@ class ListRedditViewController: UIViewController, UICollectionViewDelegate,UICol
     }
     
     override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
-        NSLog(NSStringFromCGSize(size))
-        self.floatWidth = size.width
-        self.floatHeight = size.height
+        
+        
         self.collectionView.collectionViewLayout.invalidateLayout()
         
        
@@ -199,7 +176,7 @@ class ListRedditViewController: UIViewController, UICollectionViewDelegate,UICol
     }
     //get data fro server or locall
     func GetList(refresh:Bool)  {
-        var after = UserDefaults.standard.string(forKey: "ListRedit_Paging_After") ?? ""
+        var after = UserDefaults.standard.string(forKey: UserDefaultKey_ListReditPagingAfter) ?? ""
         var maxArticle = self.articles.count + 10
         if refresh {
             after = ""

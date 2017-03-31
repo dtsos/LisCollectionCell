@@ -7,6 +7,7 @@
 //
 
 import UIKit
+public let UserDefaultKey_ListReditPagingAfter = "ListRedit_Paging_After"
 extension UIImageView {
     
     func loadURL(_ url: URL?,completionHandler:  @escaping (Bool,Data?) -> Swift.Void) {
@@ -35,6 +36,7 @@ extension UIImageView {
     
 }
 extension String {
+    //convert day ago
     func dateDiff() -> String {
         let df: DateFormatter = DateFormatter()
         df.formatterBehavior = .behavior10_4
